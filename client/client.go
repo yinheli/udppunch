@@ -90,10 +90,10 @@ func main() {
 		peers := udppunch.ParsePeers(buf[:n])
 		for _, peer := range peers {
 			key, addr := peer.Parse()
-			l.Print("reslove ", key, " ", addr)
 			if clients[key] == addr {
 				continue
 			}
+			l.Print("reslove ", key, " ", addr)
 			err = wg.SetPeerEndpoint(*iface, key, addr)
 			if err != nil {
 				l.Printf("set peer (%v) endpoint error: %v", key, err)
