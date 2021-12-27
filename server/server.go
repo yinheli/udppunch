@@ -6,6 +6,8 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/signal"
+	"syscall"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/yinheli/udppunch"
@@ -29,6 +31,21 @@ func main() {
 	}
 
 	peers, _ := lru.New(1024)
+
+	// handle dump peers
+	go func() {
+		ch := make(chan os.Signal, 1)
+		signal.Notify(ch, syscall.SIGUSR1)
+		for range ch {
+			ks := peers.Keys()
+			l.Print("dump peers:", len(ks))
+			for _, k := range ks {
+				if p, ok := peers.Get(k); ok {
+					l.Print(p)
+				}
+			}
+		}
+	}()
 
 	addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf("0.0.0.0:%d", *port))
 	if err != nil {

@@ -37,6 +37,12 @@ func (t Peer) Parse() (key Key, addr string) {
 	return
 }
 
+func (t Peer) String() string {
+	key := base64.StdEncoding.EncodeToString(t[:32])
+	ip := net.IPv4(t[32], t[33], t[34], t[35]).String()
+	return fmt.Sprintf("%s  %s:%d", key, ip, int(t[36])<<8+int(t[37]))
+}
+
 func NewKeyFromStr(pubKey string) Key {
 	b, _ := base64.StdEncoding.DecodeString(pubKey)
 	var key Key
