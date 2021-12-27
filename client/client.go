@@ -79,7 +79,7 @@ func main() {
 		buf := make([]byte, 4096)
 		n, err := conn.Read(buf)
 		if err != nil {
-			l.Fatal("read error: ", err)
+			l.Print("read error: ", err)
 			time.Sleep(time.Second * 10)
 		}
 
@@ -129,7 +129,7 @@ func handshake(raddr net.UDPAddr) {
 
 		pubKey, err := wg.GetIfacePubKey(*iface)
 		if err != nil {
-			l.Fatal("get interface public key:", err)
+			l.Print("get interface public key:", err)
 			time.Sleep(time.Second * 10)
 			continue
 		}
