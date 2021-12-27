@@ -79,7 +79,8 @@ func main() {
 		buf := make([]byte, 4096)
 		n, err := conn.Read(buf)
 		if err != nil {
-			l.Fatal(err)
+			l.Fatal("read error: ", err)
+			time.Sleep(time.Second * 10)
 		}
 
 		if n < 38 {
