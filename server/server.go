@@ -35,7 +35,7 @@ func main() {
 	// handle dump peers
 	go func() {
 		ch := make(chan os.Signal, 1)
-		signal.Notify(ch, syscall.SIGUSR1)
+		signal.Notify(ch, syscall.SIGHUP)
 		for range ch {
 			ks := peers.Keys()
 			l.Print("dump peers:", len(ks))
