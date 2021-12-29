@@ -105,7 +105,7 @@ func main() {
 			break
 		} else {
 			// sleep for a while then continue resolve
-			time.Sleep(time.Second * 5)
+			time.Sleep(time.Second * 25)
 		}
 	}
 }
