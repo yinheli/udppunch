@@ -1,5 +1,5 @@
 package udppunch
 
 const (
-	Version = "v0.0.4"
+	Version = "v0.1.0"
 )
