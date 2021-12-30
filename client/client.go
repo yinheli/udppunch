@@ -98,6 +98,7 @@ func main() {
 			err = wg.SetPeerEndpoint(*iface, key, addr)
 			if err != nil {
 				l.Printf("set peer (%v) endpoint error: %v", key, err)
+				break
 			}
 		}
 
